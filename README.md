@@ -11,6 +11,6 @@
   * [错误码](/idf-u4/cuo-wu-ma.md)
 
 ## Build状态
-
+![Release version](https://img.shields.io/badge/release-v1.0.0-blue.svg)
 
 
