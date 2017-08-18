@@ -20,5 +20,13 @@
 | :---: | :---: | :---: |
 | ![](https://img.shields.io/badge/build-passing-brightgreen.svg) | ![](https://img.shields.io/badge/build-never built-lightgrey.svg) | ![](https://img.shields.io/badge/build-never built-lightgrey.svg) |
 
+## 简介
+
+IDF-API是基于C++封装的类C接口设备驱动库。
+
+* IDF-API封装成类C接口Dll，可以给C，C++，C\#，Java，Delphi，Python等不同编程语言调用。
+* IDF-API独立，不依赖与其他formwork和支持库。
+* IDF-API兼容Window Xp
+
 
 
