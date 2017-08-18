@@ -44,61 +44,67 @@ IDF-API需要将hofonidfdriver.dll复制到生成目录下。
 #include <stdio.h>
 #include "hofonidfdriver.h"
 
+//打印HEX信息
 void printHex(uint8_t * buffer, int len)
 {
-	for (int i = 0; i < len; i++)
-	{
-		printf("%02X ", buffer[i]);
-	}
+    for (int i = 0; i < len; i++)
+    {
+        printf("%02X ", buffer[i]);
+    }
 }
-
+//实时盘存回调，输出读到数据
 void __cdecl real_time_inventory_callback(int id, InventoryData_t data, void* arg)
 {
-	printf("Real read ");
-	printf("PC: ");
-	printHex(data.Pc, 2);
-	printf("EPC: ");
-	printHex(data.Epc, data.EpcLen);
-	printf("AntId:%d Freq:%f RSSI:%ddbm", data.AntId, data.Freq, data.Rssi);
-	printf("\r\n");
+    printf("Real read ");
+    printf("PC: ");
+    printHex(data.Pc, 2);
+    printf("EPC: ");
+    printHex(data.Epc, data.EpcLen);
+    printf("AntId:%d Freq:%f RSSI:%ddbm", data.AntId, data.Freq, data.Rssi);
+    printf("\r\n");
 }
-
+//实时盘存完成回调，即单个盘存指令完成
 void __cdecl real_time_complete_callback(int id, BOOL result, uint8_t antenna_number, uint16_t read_rate, int total_read, void* arg)
 {
-	if (result)
-	{
-		printf("Read complete\r\n");
-		printf("AntNo:%d,ReadRate:%d,TotalRead:%d\r\n", antenna_number, read_rate, total_read);
-		printf("Press enter continue,other exit\r\n");
-	}
-	else
-	{
-		printf("Read failed\r\n");
-		enum ReaderErrorCode code = IDFU4_GetLastErrorCode(id);
-		printf("Last error code:%d\r\n", code);
-		printf("Press enter continue,other exit\r\n");
-	}
+    if (result)
+    {
+        printf("Read complete\r\n");
+        printf("AntNo:%d,ReadRate:%d,TotalRead:%d\r\n", antenna_number, read_rate, total_read);
+        printf("Press enter continue,other exit\r\n");
+    }
+    else
+    {
+        printf("Read failed\r\n");
+        enum ReaderErrorCode code = IDFU4_GetLastErrorCode(id);
+        printf("Last error code:%d\r\n", code);
+        printf("Press enter continue,other exit\r\n");
+    }
 }
 
 int main()
 {
-	printf("This is a idf-u4 c demo\r\n");
-	int id = IDFU4_CreateController(TcpClient, "192.168.0.10", 23443);
-	if (IDFU4_Open(id))
-	{
-		printf("Open controller success\r\n");
-	}
-	else
-	{
-		printf("Open controller failed\r\n");
-	}
-	do 
-	{
-		IDFU4_RealTimeInventory(id, 1, real_time_inventory_callback, real_time_complete_callback, NULL);
-	} while (getchar() == '\n');
-	IDFU4_Close(id);
-	IDFU4_DestroyController(id);
-	return 0;
+    printf("This is a idf-u4 c demo\r\n");
+    //1.创建控制器
+    int id = IDFU4_CreateController(TcpClient, "192.168.0.10", 23443);
+    //2.打开控制器
+    if (IDFU4_Open(id))
+    {
+        printf("Open controller success\r\n");
+    }
+    else
+    {
+        printf("Open controller failed\r\n");
+    }
+    do 
+    {
+        //3实时盘存
+        IDFU4_RealTimeInventory(id, 1, real_time_inventory_callback, real_time_complete_callback, NULL);
+    } while (getchar() == '\n');
+    //4关闭控制器
+    IDFU4_Close(id);
+    //5释放控制器
+    IDFU4_DestroyController(id);
+    return 0;
 }
 ```
 
