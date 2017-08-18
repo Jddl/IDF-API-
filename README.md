@@ -29,5 +29,13 @@ IDF-API是基于C++封装的类C接口设备驱动库。
 * IDF-API兼容Window xp及以上系统。（后续将支持Linux等其他操作系统）
 * IDF-API在同一进程内可以实现255个设备控制器。
 
+## 安装
 
+IDF-API需要将hofonidfdriver.dll复制到生成目录下。
 
+* 对于c和c++项目，需要将hofonidfdriver.h复制到项目include目录中。如果是静态导入，可以包含hofonidfdriver.lib。
+* 对于其他语言，可以参考相应demo实现API的调用。
+
+## 用法一览
+
+此简单例子实现一个控制器的创建，打开，以及EPC等信息的实时读取。
