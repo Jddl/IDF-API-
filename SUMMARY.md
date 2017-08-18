@@ -7,5 +7,4 @@
     * [控制器](idf-u4/kong-zhi-qi-chuang-jian.md)
     * [系统设置操作](idf-u4/can-shu-she-zhi.md)
     * [ISO 18000-6C标签操作](idf-u4/iso-18000-6cbiao-qian-cao-zuo.md)
-    * 错误码
 
