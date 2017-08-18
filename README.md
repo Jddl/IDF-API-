@@ -18,7 +18,7 @@
 
 | Windows | Linux | Android |
 | :---: | :---: | :---: |
-| ![](https://img.shields.io/badge/build-passing-brightgreen.svg) | ![](https://img.shields.io/badge/build-never built-lightgrey.svg) |  ![](https://img.shields.io/badge/build-never built-lightgrey.svg)  |
+| ![](https://img.shields.io/badge/build-passing-brightgreen.svg) | ![](https://img.shields.io/badge/build-never built-lightgrey.svg) | ![](https://img.shields.io/badge/build-never built-lightgrey.svg) |
 
 
 
